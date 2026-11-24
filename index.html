@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Selamat Ulang Tahun, Icaaa! 🎂</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: 'Georgia', serif;
+      background: linear-gradient(135deg, #fff1eb 0%, #ace0f9 100%);
+      background: linear-gradient(135deg, #fdfbfb 0%, #f5ebe0 100%);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      padding: 20px;
+      text-align: center;
+      color: #4a3f35;
+      overflow-x: hidden;
+    }
+
+    .kartu {
+      background: #fffdf9;
+      padding: 30px 24px;
+      border-radius: 22px;
+      box-shadow: 0 12px 30px rgba(0,0,0,0.12);
+      max-width: 380px;
+      width: 100%;
+      border: 1px solid #e6ccb2;
+      position: relative;
+      z-index: 10;
+    }
+
+    h2 {
+      margin: 8px 0 6px 0;
+      color: #9c6644;
+      font-size: 22px;
+    }
+
+    p {
+      font-size: 15px;
+      line-height: 1.6;
+      color: #5c4d3c;
+    }
+
+    button {
+      background-color: #b08968;
+      color: white;
+      border: none;
+      padding: 13px 26px;
+      font-size: 16px;
+      border-radius: 30px;
+      cursor: pointer;
+      font-family: sans-serif;
+      font-weight: bold;
+      box-shadow: 0 4px 12px rgba(176, 137, 104, 0.4);
+      transition: transform 0.2s, background-color 0.2s;
+      margin-top: 10px;
+    }
+    button:hover { background-color: #9c6644; }
+    button:active { transform: scale(0.95); }
+
+    /* Animasi Amplop Goyang di Halaman 1 */
+    .amplop-lucu {
+      font-size: 64px;
+      display: inline-block;
+      animation: goyang 1.5s infinite ease-in-out;
+      margin-bottom: 10px;
+    }
+    @keyframes goyang {
+      0%, 100% { transform: rotate(0deg) scale(1); }
+      25% { transform: rotate(-10deg) scale(1.05); }
+      75% { transform: rotate(10deg) scale(1.05); }
+    }
+
+    /* Styling Kue & Mini Game Tiup Lilin */
+    .kue-container {
+      margin: 25px auto 20px auto;
+      position: relative;
+      width: 180px;
+      height: 140px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-end;
+    }
+    .lilin-baris {
+      display: flex;
+      gap: 24px;
+      margin-bottom: -4px;
+      z-index: 2;
+    }
+    .lilin {
+      width: 12px;
+      height: 38px;
+      background: repeating-linear-gradient(45deg, #ff8fa3, #ff8fa3 5px, #fff 5px, #fff 10px);
+      border-radius: 4px;
+      position: relative;
+      cursor: pointer;
+    }
+    .api {
+      width: 14px;
+      height: 20px;
+      background: radial-gradient(circle, #fff700 20%, #ff7b00 80%);
+      border-radius: 50% 50% 50% 50% / 60% 60% 40% 40%;
+      position: absolute;
+      top: -22px;
+      left: -1px;
+      box-shadow: 0 0 12px #ff9e00;
+      animation: kedipApi 0.4s infinite alternate;
+      transition: opacity 0.3s, transform 0.3s;
+    }
+    .api.padam {
+      opacity: 0;
+      transform: scale(0);
+      pointer-events: none;
+    }
+    @keyframes kedipApi {
+      from { transform: scale(1) rotate(-3deg); }
+      to { transform: scale(1.12) rotate(3deg); }
+    }
+    .kue-atas {
+      width: 130px;
+      height: 40px;
+      background: #f4acb7;
+      border-radius: 12px 12px 0 0;
+      border-bottom: 6px solid #fff0f3;
+    }
+    .kue-bawah {
+      width: 165px;
+      height: 48px;
+      background: #d8a48f;
+      border-radius: 10px 10px 14px 14px;
+      box-shadow: 0 6px 0 #b08968;
+    }
+
+    /* Styling Isi Kartu Utama */
+    .bingkai-foto {
+      background: white;
+      padding: 10px 10px 24px 10px;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+      border-radius: 6px;
+      display: inline-block;
+      margin-bottom: 16px;
+      animation: fotoGoyang 3s infinite ease-in-out;
+    }
+    @keyframes fotoGoyang {
+      0%, 100% { transform: rotate(-2deg); }
+      50% { transform: rotate(2deg); }
+    }
+    img {
+      width: 215px;
+      height: 265px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+    }
+    .nama-penerima {
+      font-size: 18px;
+      font-weight: bold;
+      color: #7f5539;
+      margin-bottom: 14px;
+    }
+    .ucapan {
+      font-size: 14.5px;
+      line-height: 1.65;
+      color: #5c4d3c;
+    }
+    .ucapan p { margin: 0 0 12px 0; }
+    .penutup-cinta {
+      font-weight: bold;
+      color: #9c6644;
+      font-size: 16px;
+    }
+
+    /* Transisi Layar */
+    .layar { display: none; }
+    .layar.aktif {
+      display: block;
+      animation: muncul 0.7s ease;
+    }
+    @keyframes muncul {
+      from { opacity: 0; transform: translateY(15px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Partikel Konfeti & Hati */
+    .partikel {
+      position: fixed;
+      top: -20px;
+      font-size: 20px;
+      pointer-events: none;
+      z-index: 99;
+      animation: jatuh linear forwards;
+    }
+    @keyframes jatuh {
+      to {
+        transform: translateY(105vh) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="kartu">
+    <!-- LAYAR 1: Pembuka -->
+    <div id="layar-1" class="layar aktif">
+      <div class="amplop-lucu">💌</div>
+      <h2>Hai, Anisya Dwi Asmiyati!</h2>
+      <p>Ada kejutan kecil buat kamu hari ini. Pastikan volume HP-mu nyala ya!</p>
+      <button onclick="mulaiGame()">Buka Kejutan 🎁</button>
+    </div>
+
+    <!-- LAYAR 2: Mini-Game Tiup Lilin -->
+    <div id="layar-2" class="layar">
+      <h2>Make a Wish Dulu! ✨</h2>
+      <p id="instruksi-lilin">Pejamkan mata, berdoa, lalu klik tombol di bawah (atau tap apinya) untuk meniup lilin!</p>
+      
+      <div class="kue-container">
+        <div class="lilin-baris">
+          <div class="lilin" onclick="padamkanSatu(0)"><div class="api" id="api-0"></div></div>
+          <div class="lilin" onclick="padamkanSatu(1)"><div class="api" id="api-1"></div></div>
+          <div class="lilin" onclick="padamkanSatu(2)"><div class="api" id="api-2"></div></div>
+        </div>
+        <div class="kue-atas"></div>
+        <div class="kue-bawah"></div>
+      </div>
+
+      <button id="btn-tiup" onclick="tiupLilin()">Tiup Lilin 💨</button>
+    </div>
+
+    <!-- LAYAR 3: Kartu Ucapan Utama -->
+    <div id="layar-3" class="layar">
+      <div class="bingkai-foto">
+        <!-- Pastikan ekstensi foto (.jpg / .png) sesuai dengan file di GitHub -->
+        <img src="foto-ultah.jpg" alt="Foto Masa Kecil Anisya">
+      </div>
+      <h2>Selamat Ulang Tahun! 🎉</h2>
+      <div class="nama-penerima">Anisya Dwi Asmiyati</div>
+      
+      <div class="ucapan">
+        <p>
+          Selamat ulang tahun ya, icaaa! Terima kasih sudah tumbuh jadi perempuan hebat, 
+          baik hati, dan selalu membawa kebahagiaan di hidupku.
+        </p>
+        <p>
+          Doa terbaik untukmu: Semoga di usia yang baru ini kamu selalu diberikan kesehatan, 
+          dimudahkan segala urusannya, impian-impian hebatmu tercapai satu persatu, Amiiinnnn.
+        </p>
+        <p class="penutup-cinta">I love you! ✨💖</p>
+      </div>
+    </div>
+
+    <!-- Audio Lagu Ulang Tahun -->
+    <audio id="lagu" loop>
+      <source src="lagu-ultah.mp3" type="audio/mpeg">
+    </audio>
+  </div>
+
+  <script>
+    let lilinPadam = [false, false, false];
+
+    function pindahLayar(dari, ke) {
+      document.getElementById(dari).classList.remove('aktif');
+      document.getElementById(ke).classList.add('aktif');
+    }
+
+    function mulaiGame() {
+      document.getElementById('lagu').play();
+      pindahLayar('layar-1', 'layar-2');
+    }
+
+    function padamkanSatu(index) {
+      if (!lilinPadam[index]) {
+        lilinPadam[index] = true;
+        document.getElementById('api-' + index).classList.add('padam');
+        cekSemuaPadam();
+      }
+    }
+
+    function tiupLilin() {
+      // Memadamkan lilin satu per satu setiap kali tombol ditekan
+      const belumPadam = lilinPadam.findIndex(status => status === false);
+      if (belumPadam !== -1) {
+        padamkanSatu(belumPadam);
+      }
+    }
+
+    function cekSemuaPadam() {
+      const sisa = lilinPadam.filter(status => !status).length;
+      const teks = document.getElementById('instruksi-lilin');
+      
+      if (sisa === 2) {
+        teks.innerText = "Wihh 1 padam! Ayo tiup lebih kencang lagi! 💨";
+      } else if (sisa === 1) {
+        teks.innerText = "Tinggal 1 lilin lagi! Tiup sekali lagi! 😆";
+      } else if (sisa === 0) {
+        teks.innerText = "Yeayyy! Amiiinnnn untuk semua doamu! 🎉";
+        document.getElementById('btn-tiup').style.display = 'none';
+        luncurkanKonfeti();
+        setTimeout(() => {
+          pindahLayar('layar-2', 'layar-3');
+        }, 1200);
+      }
+    }
+
+    function luncurkanKonfeti() {
+      const simbol = ['🎉', '💖', '✨', '🎂', '🌸', '🎈'];
+      for (let i = 0; i < 45; i++) {
+        setTimeout(() => {
+          const el = document.createElement('div');
+          el.classList.add('partikel');
+          el.innerText = simbol[Math.floor(Math.random() * simbol.length)];
+          el.style.left = Math.random() * 100 + 'vw';
+          el.style.animationDuration = (Math.random() * 2 + 2.5) + 's';
+          document.body.appendChild(el);
+          setTimeout(() => el.remove(), 4500);
+        }, i * 60);
+      }
+    }
+  </script>
+
+</body>
+</html>
